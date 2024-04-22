@@ -1,10 +1,18 @@
+import { cn } from '@/lib/utils'
+
 export type SquareProps = {
-    value: string
+    value: string | React.ReactNode
+    className?: string
 }
 
-export const Square = ({ value }: SquareProps) => {
+export const Square = ({ value, className }: SquareProps) => {
     return (
-        <div className="flex size-14 items-center justify-center rounded-sm border text-2xl font-black">
+        <div
+            className={cn(
+                'flex size-14 items-center justify-center rounded-sm border text-2xl font-black',
+                className
+            )}
+        >
             {value}
         </div>
     )

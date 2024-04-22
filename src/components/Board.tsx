@@ -10,7 +10,7 @@ export const Board = ({ numberOfCharacters, attemptCount }: BoardProps) => {
     for (let i = 0; i < attemptCount; i++) {
         board.push(
             <div className="mb-2">
-                <Row numberOfCharacters={numberOfCharacters} />
+                <Row key={i} numberOfCharacters={numberOfCharacters} />
             </div>
         )
     }
