@@ -1,18 +1,13 @@
 import { Row } from './Row'
+import { useBoardStore } from '@/lib/store/useBoardStore'
 
-type BoardProps = {
-    numberOfCharacters: number
-    attemptCount: number
-}
-
-export const Board = ({ numberOfCharacters, attemptCount }: BoardProps) => {
-    const board = []
-    for (let i = 0; i < attemptCount; i++) {
-        board.push(
-            <div className="mb-2">
-                <Row key={i} numberOfCharacters={numberOfCharacters} />
-            </div>
-        )
-    }
-    return <div className="mt-5">{board}</div>
+export const Board = () => {
+    const { board } = useBoardStore()
+    return (
+        <div>
+            {board.map((row, index) => (
+                <Row key={index} row={row} />
+            ))}
+        </div>
+    )
 }

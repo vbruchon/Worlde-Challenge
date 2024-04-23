@@ -1,5 +1,6 @@
 import { CornerDownLeft, Delete } from 'lucide-react'
 import { Square } from './Square'
+import { useUpdateBoard } from '@/lib/hooks/useUpdateBoard'
 
 export type KeyButtonProps = {
     value: string
@@ -7,20 +8,22 @@ export type KeyButtonProps = {
 
 export const KeyButton = ({ value }: KeyButtonProps) => {
     const defineKeyValue = (value: string) => {
-        if (value === 'enter') {
+        if (value === 'Enter') {
             return <CornerDownLeft />
         }
-        if (value === 'backspace') {
+        if (value === 'Backspace') {
             return <Delete />
         }
         return value
     }
+    const { updateBoard } = useUpdateBoard({ newKey: value })
+
     return (
-        <button onClick={() => console.log(value)}>
+        <button onClick={() => updateBoard()}>
             <Square
                 key={value}
                 value={defineKeyValue(value)}
-                className=" bg-slate-800 transition-all hover:scale-110"
+                className="bg-slate-800 transition-all hover:scale-110"
             />
         </button>
     )
