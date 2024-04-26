@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useUpdateBoard } from './useUpdateBoard'
 
-export const useKeyboardEvents = () => {
-    const { updateBoard } = useUpdateBoard({ newKey: '' })
+export const useKeyboardEvents = (secretWord: string) => {
+    const { updateBoard } = useUpdateBoard({ newKey: '', secretWord })
     useEffect(() => {
         const handlePress = (event: KeyboardEvent) => {
             updateBoard(event.key)

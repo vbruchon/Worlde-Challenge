@@ -61,3 +61,38 @@
         @apply bg-background text-foreground;
     }
 }
+
+.fill {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    animation: fillAnimation 2s forwards;
+}
+
+.bg-green.fill {
+    background-color: #1bc400;
+}
+
+.bg-orange.fill {
+    background-color: #ebb700;
+}
+
+.bg-gray.fill {
+    background-color: #818181;
+}
+
+@keyframes fillAnimation {
+    0% {
+        width: 0;
+        height: 0;
+    }
+    100% {
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+    }
+}

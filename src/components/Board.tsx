@@ -1,12 +1,13 @@
+import { useGame } from '@/lib/store/useGame'
 import { Row } from './Row'
-import { useBoardStore } from '@/lib/store/useBoardStore'
 
 export const Board = () => {
-    const { board } = useBoardStore()
+    const { board } = useGame()
+
     return (
         <div>
             {board.map((row, index) => (
-                <Row key={index} row={row} />
+                <Row key={index} row={row} rowId={index} />
             ))}
         </div>
     )

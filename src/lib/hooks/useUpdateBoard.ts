@@ -1,14 +1,21 @@
-import { useBoardPositionStore } from '../store/useBoardPositionStore'
-import { useBoardStore } from '../store/useBoardStore'
+import { useGame } from '../store/useGame'
+import { useValidateProposal } from './useValidateProposal'
 
 type UpdateBoardProps = {
     newKey: string
+    secretWord: string
 }
 
-export const useUpdateBoard = ({ newKey }: UpdateBoardProps) => {
-    const { board, setBoard } = useBoardStore()
-    const { xPosition, yPosition, setXPosition, setYPosition } =
-        useBoardPositionStore()
+export const useUpdateBoard = ({ newKey, secretWord }: UpdateBoardProps) => {
+    const {
+        board,
+        setBoard,
+        xPosition,
+        yPosition,
+        setXPosition,
+        setYPosition,
+    } = useGame()
+    const { validateProposal } = useValidateProposal(xPosition)
     const updateBoard = (key = newKey) => {
         const alphabetKeys = 'AZERTYUIOPQSDFGHJKLMWXCVBN'
         const acceptedKeys = [...alphabetKeys, 'Enter', 'Backspace']
@@ -33,6 +40,7 @@ export const useUpdateBoard = ({ newKey }: UpdateBoardProps) => {
 
             if (key === 'Enter') {
                 if (yPosition === board[xPosition].length) {
+                    validateProposal(secretWord, board[xPosition])
                     setXPosition(xPosition + 1)
                     setYPosition(0)
                 } else {
@@ -52,5 +60,6 @@ export const useUpdateBoard = ({ newKey }: UpdateBoardProps) => {
             }
         }
     }
+
     return { updateBoard }
 }
