@@ -6,6 +6,7 @@ export const useValidateProposal = (xPosition: number) => {
     const validateProposal = (word: string, row: string[]) => {
         const secretWordArray = word.split('')
         let count = 0
+        console.log({ secretWordArray })
 
         row.forEach((value, index) => {
             const animatedBgDivBoard = document.querySelector(
@@ -18,6 +19,8 @@ export const useValidateProposal = (xPosition: number) => {
             const animatedBgDivKeyBoard = document.querySelector(
                 '#keyBoard #animated-bg-key-' + value
             )
+            console.log({ secretWordArray })
+
             if (!secretWordArray.includes(value.toLowerCase())) {
                 console.log(
                     'la lettre ' + value + "n'est pas dans le mot : " + word
@@ -33,6 +36,7 @@ export const useValidateProposal = (xPosition: number) => {
 
                 return
             } else {
+                const id = secretWordArray.indexOf(value.toLowerCase())
                 if (value.toLowerCase() === secretWordArray[index]) {
                     console.log(
                         'la lettre ' + value + ' est à la bonne position '
@@ -41,6 +45,7 @@ export const useValidateProposal = (xPosition: number) => {
                     animatedBgDivKeyBoard?.classList.add('bg-green', 'fill')
                     animatedBgDivKeyBoard?.classList.remove('bg-orange')
                     count++
+                    secretWordArray[index] = ''
                 } else {
                     console.log(
                         'la lettre ' + value + " n'est pas à la bonne position "
@@ -54,15 +59,24 @@ export const useValidateProposal = (xPosition: number) => {
                             'fill'
                         )
                     }
+                    console.log({ id })
+                    secretWordArray[id] = ''
+                    console.log(secretWordArray[secretWordArray.indexOf(value)])
                 }
             }
         })
 
+        console.log(xPosition)
+
         if (count === 5) {
-            setGameState('win')
+            setTimeout(() => {
+                setGameState('win')
+            }, 700)
         }
         if (xPosition === 5) {
-            setGameState('lose')
+            setTimeout(() => {
+                setGameState('lose')
+            }, 700)
         }
     }
 

@@ -1,10 +1,12 @@
 import { useKeyboardEvents } from '@/lib/hooks/useKeyboardEvents'
 import { KeyButton } from './KeyButton'
+import { useGame } from '@/lib/store/useGame'
 
-export const KeyBoard = ({ secretWord }: { secretWord: string }) => {
+export const KeyBoard = () => {
     const alphabet = 'AZERTYUIOPQSDFGHJKLMWXCVBN'
     const keys = [...alphabet, 'Enter', 'Backspace']
-    useKeyboardEvents(secretWord)
+    const { word } = useGame()
+    useKeyboardEvents(word)
 
     return (
         <div
@@ -12,7 +14,7 @@ export const KeyBoard = ({ secretWord }: { secretWord: string }) => {
             className="flex max-w-2xl flex-wrap justify-center gap-1.5"
         >
             {keys.map((key, index) => (
-                <KeyButton value={key} key={index} secretWord={secretWord} />
+                <KeyButton value={key} key={index} />
             ))}
         </div>
     )

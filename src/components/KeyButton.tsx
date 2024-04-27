@@ -1,13 +1,14 @@
 import { CornerDownLeft, Delete } from 'lucide-react'
 import { Square } from './Square'
 import { useUpdateBoard } from '@/lib/hooks/useUpdateBoard'
+import { useGame } from '@/lib/store/useGame'
 
 export type KeyButtonProps = {
     value: string
-    secretWord: string
 }
 
-export const KeyButton = ({ value, secretWord }: KeyButtonProps) => {
+export const KeyButton = ({ value }: KeyButtonProps) => {
+    const { word } = useGame()
     const defineKeyValue = (value: string) => {
         if (value === 'Enter') {
             return <CornerDownLeft />
@@ -19,7 +20,7 @@ export const KeyButton = ({ value, secretWord }: KeyButtonProps) => {
     }
     const { updateBoard } = useUpdateBoard({
         newKey: value,
-        secretWord: secretWord,
+        secretWord: word,
     })
 
     return (
