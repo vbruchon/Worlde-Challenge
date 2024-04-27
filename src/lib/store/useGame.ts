@@ -1,5 +1,7 @@
 import { create } from 'zustand'
 
+type GameStateType = 'no_play' | 'in_progress' | 'win' | 'lose'
+
 export type useGameType = {
     board: string[][]
     setBoard: (newBoard: string[][]) => void
@@ -7,8 +9,8 @@ export type useGameType = {
     yPosition: number
     setXPosition: (newPosition: number) => void
     setYPosition: (newPosition: number) => void
-    isFinish: boolean
-    setIsFinish: (newValue: boolean) => void
+    gameState: GameStateType
+    setGameState: (newValue: GameStateType) => void
 }
 
 export const useGame = create<useGameType>((set) => ({
@@ -25,6 +27,6 @@ export const useGame = create<useGameType>((set) => ({
     yPosition: 0,
     setXPosition: (newPosition) => set({ xPosition: newPosition }),
     setYPosition: (newPosition) => set({ yPosition: newPosition }),
-    isFinish: false,
-    setIsFinish: (newValue) => set({ isFinish: newValue }),
+    gameState: 'no_play',
+    setGameState: (newValue) => set({ gameState: newValue }),
 }))

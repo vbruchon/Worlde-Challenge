@@ -1,14 +1,16 @@
+import { useWindowSize } from '@/lib/hooks/useWindowSize'
 import { useEffect, useState } from 'react'
 import ConfettiExplosion from 'react-confetti-explosion'
 
 export const ConfettiReaction = () => {
+    const { width, height } = useWindowSize()
     const bigExplodeProps = {
         force: 0.6,
         duration: 4000,
         particleCount: 400,
         zIndex: 20,
-        Height: 0,
-        Width: 0,
+        height: height,
+        width: width * 0.75,
     }
     const [firstExplosionIsVisible, setFirstExplosionIsVisible] =
         useState(false)

@@ -3,6 +3,9 @@ import { Board } from './components/Board'
 import { KeyBoard } from './components/KeyBoard'
 import { useGame } from './lib/store/useGame'
 import { ConfettiReaction } from './components/ConfettiReaction'
+import { RulesModal } from './components/modal/RulesModal'
+import { LoseModal } from './components/modal/LoseModal'
+import { WinModal } from './components/modal/WinModal'
 
 function App() {
     const words = [
@@ -34,20 +37,28 @@ function App() {
     const [word] = useState(
         () => words[Math.floor(Math.random() * words.length)]
     )
-    const { isFinish } = useGame()
+    const { gameState } = useGame()
+    const [open, setOpen] = useState(true)
 
     return (
         <div className="relative flex h-screen w-full flex-col items-center gap-y-16 overflow-hidden">
+            {open && <RulesModal setOpen={setOpen} />}
             <h1 className="mt-[3%] text-5xl font-bold underline">
                 Wordles ! - {word}
             </h1>
-            {isFinish && (
+            {gameState === 'win' && (
                 <>
                     <ConfettiReaction />
+                    <WinModal word={word} />
                 </>
             )}
-            <Board />
-            <KeyBoard secretWord={word} />
+            {gameState === 'in_progress' && (
+                <>
+                    <Board />
+                    <KeyBoard secretWord={word} />
+                </>
+            )}
+            {gameState === 'lose' && <LoseModal word={word} />}
         </div>
     )
 }
