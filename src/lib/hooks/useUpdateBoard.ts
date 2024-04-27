@@ -33,8 +33,6 @@ export const useUpdateBoard = ({ newKey, secretWord }: UpdateBoardProps) => {
                     newBoard[xPosition][yPosition] = key.toUpperCase()
                     setBoard(newBoard)
                     setYPosition(yPosition + 1)
-                } else {
-                    console.log('Please press Enter for valid your word')
                 }
             }
 
@@ -43,10 +41,6 @@ export const useUpdateBoard = ({ newKey, secretWord }: UpdateBoardProps) => {
                     validateProposal(secretWord, board[xPosition])
                     setXPosition(xPosition + 1)
                     setYPosition(0)
-                } else {
-                    console.log(
-                        'Please complete the word before pressing Enter'
-                    )
                 }
             }
 
